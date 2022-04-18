@@ -21,8 +21,13 @@ namespace Sociable.Models
         [StringLength(2000, MinimumLength = 1)]
         public string Content { get; set; }
         [Required]
+
+        [DataType(DataType.Date)]
         public DateTime TimeCreated { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime TimeEdited { get; set; }
+
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         public string PostId { get; set; }

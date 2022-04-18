@@ -23,9 +23,19 @@ namespace Sociable.Controllers
             return View();
         }
 
+        public IActionResult Exception()
+        {
+            throw new Exception();
+        }
+
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult StatusCodeError(int errorCode)
+        {
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

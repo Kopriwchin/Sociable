@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sociable.Data;
+using Sociable.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,11 +31,17 @@ namespace Sociable
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+
+            services.AddControllersWithViews(configure =>
+            {
+                configure.Filters.Add(typeof(AddHeaderActionFilter));
+            });
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +58,10 @@ namespace Sociable
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //app.UseExceptionHandler("/Home/StatusCodeError");
+            //app.UseStatusCodePagesWithReExecute("/Home/StatusCodeError", "errorCode={0}");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

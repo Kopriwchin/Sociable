@@ -27,9 +27,12 @@ namespace Sociable.Models
         public ApplicationUser User { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTime TimePosted { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime TimeEdited { get; set; }
+
         public bool Visible { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<LikedPost> Likes { get; set; }
