@@ -1,6 +1,4 @@
-using System;
-
-namespace Sociable.Models
+namespace Sociable.ViewModels.Output
 {
     public class ErrorViewModel
     {

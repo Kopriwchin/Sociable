@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Sociable.Models
 {
     public class Comment
@@ -32,6 +29,6 @@ namespace Sociable.Models
         public ApplicationUser User { get; set; }
         public string PostId { get; set; }
         public Post Post { get; set; }
-        public ICollection<LikedComment> Likes { get; set; }
+        public virtual ICollection<LikedComment> Likes { get; set; }
     }
 }
